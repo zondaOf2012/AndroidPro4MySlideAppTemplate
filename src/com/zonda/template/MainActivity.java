@@ -1,7 +1,7 @@
-package com.zonda.apptemplate;
+package com.zonda.template;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
 
 public class MainActivity extends Activity {

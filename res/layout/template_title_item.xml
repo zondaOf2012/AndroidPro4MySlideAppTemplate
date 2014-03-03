@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/feature_column_common"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <View
+        android:id="@+id/column_h_line"
+        android:layout_width="match_parent"
+        android:layout_height="1.0px"
+        android:layout_alignLeft="@+id/column_title"
+        android:layout_below="@+id/column_title"
+        android:layout_marginRight="13dp"
+        android:background="@color/list_divider" />
+
+    <TextView
+        android:id="@+id/column_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/column_date"
+        android:layout_below="@+id/column_date"
+        android:layout_marginBottom="11dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="3dp"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/column_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/column_timer_axis"
+        android:gravity="bottom" />
+
+    <ImageView
+        android:id="@+id/column_v_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/column_h_line"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="19dp"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitXY"
+        android:src="@drawable/title_v_line" />
+
+    <ImageView
+        android:id="@+id/column_timer_axis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="14dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/app_name"
+        android:maxWidth="13dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/title_axis_red" />
+
+</RelativeLayout>
