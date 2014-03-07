@@ -11,5 +11,4 @@
     android:fadingEdge="none"
     android:focusable="false"
     android:listSelector="@null"
-    android:scrollbarStyle="insideOverlay"
-    android:scrollbarThumbVertical="@null" />
+    android:scrollbarStyle="insideOverlay"/>
