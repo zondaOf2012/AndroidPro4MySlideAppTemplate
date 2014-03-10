@@ -14,6 +14,15 @@
         <item>游戏工具</item>
     </string-array>
     
+    <string-array name="slide_item_showtype_ids">
+        <item>isGrid</item>
+        <item>isWebView</item>
+        <item>isList</item>
+        <item>isGrid</item>
+        <item>isGrid</item>
+        <item>isGrid</item>
+    </string-array>
+    
     <string-array name="slide_title_items">
         <item>天天酷跑刷分攻略汇总 11月24日全部亲测</item>
         <item>天天酷跑审判女王和金枪小帅哪个好</item>
