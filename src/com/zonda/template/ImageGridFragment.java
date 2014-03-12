@@ -1,15 +1,15 @@
 package com.zonda.template;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +22,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 
-public class ImageGridFragment extends Fragment implements
+public class ImageGridFragment extends BaseFragment implements
 		AdapterView.OnItemClickListener {
 
 	public static final int holoRedLight = 0xffff4444;
@@ -33,14 +33,8 @@ public class ImageGridFragment extends Fragment implements
 
 	private final static String TAG = "ImageGridFragment";
 
-	private final static String GRID_TYPE = "Grid_Type";
-	
-	public final static String EXTRA_TITLE_ARG = "EXTRA_TITLE_ARG";
+	public final static String GRID_PARAMS_KEY = "Grid_Type";
 
-	public final static int GRID_PETS_TYPE = 1;
-
-	public final static int GRID_ZOMBIES_TYPE = 2;
-	
 	private int mImageThumbSize;
 
 	private int mImageThumbSpacing;
@@ -51,21 +45,6 @@ public class ImageGridFragment extends Fragment implements
 
 	public ImageGridFragment() {
 
-	}
-
-	public static ImageGridFragment getInstance(int grid_type, String titleName) {
-
-		ImageGridFragment fragment = new ImageGridFragment();
-
-		Bundle args = new Bundle();
-
-		args.putInt(GRID_TYPE, grid_type);
-		
-		args.putString(EXTRA_TITLE_ARG, titleName);
-
-		fragment.setArguments(args);
-
-		return fragment;
 	}
 
 	@Override
@@ -81,23 +60,30 @@ public class ImageGridFragment extends Fragment implements
 
 		mAdapter = new ImageAdapter(getActivity());
 
-		int types = getArguments().getInt(GRID_TYPE, GRID_PETS_TYPE);
+		initImgs();
+	}
 
-		StringBuffer sb = null;
+	private void initImgs() {
 
-		switch (types) {
-		case GRID_PETS_TYPE:
+		MenuItemModel itemModel = getParams();
 
-			for (int i = 1; i <= 45; i++) {
+		int first = itemModel.grid_first_index;
 
-				sb = new StringBuffer();
-				sb.append("pet").append(File.separator).append("pet_")
-						.append(i).append(".jpg");
-				images.add(sb.toString());
-			}
-			break;
-		default:
-			break;
+		int count = itemModel.grid_count;
+
+		String assertPrefix = itemModel.grid_item_prefix;
+
+		String assertPostFix = itemModel.grid_item_postfix;
+
+		StringBuffer imgAssertPath = null;
+
+		for (int i = first; i <= (count - first); i++) {
+
+			imgAssertPath = new StringBuffer();
+
+			imgAssertPath.append(assertPrefix).append(i).append(assertPostFix);
+
+			images.add(imgAssertPath.toString());
 		}
 	}
 
@@ -109,22 +95,20 @@ public class ImageGridFragment extends Fragment implements
 
 		final View v = inflater.inflate(R.layout.image_grid_fragment,
 				container, false);
-		
-		//TODO
-		String titleText = getArguments().getString(EXTRA_TITLE_ARG);
-		
-		if(titleText == null){
-			
+
+		String titleText = getTitleText();
+
+		if (TextUtils.isEmpty(titleText)) {
+
 			titleText = getResources().getString(R.string.app_name);
 		}
-		
 
 		final GridView mGridView = (GridView) v.findViewById(R.id.gridView);
 
-//		mGridView.setBackgroundColor(holoGreenLight);
-		
+		// mGridView.setBackgroundColor(holoGreenLight);
+
 		mGridView.setAdapter(mAdapter);
-		
+
 		mGridView.setOnItemClickListener(this);
 
 		mGridView.getViewTreeObserver().addOnGlobalLayoutListener(
@@ -152,7 +136,6 @@ public class ImageGridFragment extends Fragment implements
 
 		return v;
 	}
-	
 
 	private class ImageAdapter extends BaseAdapter {
 
@@ -198,12 +181,12 @@ public class ImageGridFragment extends Fragment implements
 
 				imageView = new ImageView(mContext);
 			}
-			
-			if(position % 2 == 0){
-				
+
+			if (position % 2 == 0) {
+
 				imageView.setBackgroundColor(holoRedLight);
-			}else{
-				
+			} else {
+
 				imageView.setBackgroundColor(holoBlueLight);
 			}
 
@@ -217,7 +200,7 @@ public class ImageGridFragment extends Fragment implements
 				Bitmap bitmap = BitmapFactory.decodeStream(ins);
 
 				imageView.setScaleType(ScaleType.CENTER_INSIDE);
-				
+
 				imageView.setLayoutParams(mImageViewLayoutParams);
 
 				imageView.setImageBitmap(bitmap);
@@ -253,27 +236,21 @@ public class ImageGridFragment extends Fragment implements
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 
-//		Intent intent = new Intent(getActivity(), ImageDetailActivity.class);
-//
-//		int types = -1;
-//		
-//		switch (getArguments().getInt(GRID_TYPE, GRID_PLANTS_TYPE)) {
-//		case GRID_PLANTS_TYPE:
-//			
-//			types = ImageDetailActivity.EXTRA_PLANTS_TYPE;
-//			break;
-//		case GRID_ZOMBIES_TYPE:
-//			
-//			types = ImageDetailActivity.EXTRA_ZOMBIES_TYPE;
-//			break;
-//		default:
-//			break;
-//		}
-//		
-//		intent.putExtra(ImageDetailActivity.EXTRA_DETAIL_TYPE, types);
-//		
-//		intent.putExtra(ImageDetailActivity.EXTRA_IMAGE, position);
-//		
-//		startActivity(intent);
+		Intent intent = new Intent(context, WebViewFragmentActivity.class);
+
+		MenuItemModel itemModel = getParams();
+		
+		StringBuffer sb = new StringBuffer();
+		
+		sb.append(itemModel.grid_detail_prefix)
+		  .append(itemModel.grid_first_index + position)
+		  .append(itemModel.grid_detail_postfix);
+		
+		itemModel.web_uri = sb.toString();
+		
+		intent.putExtra(WebViewFragmentActivity.WEBVIEW_PARAMS_KEY,
+				getParams());
+
+		startActivity(intent);
 	}
 }

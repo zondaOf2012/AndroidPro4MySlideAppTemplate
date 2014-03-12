@@ -1,32 +1,27 @@
 package com.zonda.template;
 
+import java.util.ArrayList;
+
 import android.content.Context;
-import android.content.res.Resources.NotFoundException;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class MenuFragment extends Fragment {
+public class MenuFragment extends BaseFragment {
 
+	public static final String MENU_PARAMS_KEY = "menu_params";
+	
 	private OnSwitchItemListener mSwitchItemListener;
 
-	private int textArrayResId;
+	private MenuAdapter mAdapter;
 
-	public static MenuFragment getInstance(int menuArrayResId) {
+	private ArrayList<MenuItemModel> mDatas;
 
-		MenuFragment fragment = new MenuFragment();
-
-		fragment.textArrayResId = menuArrayResId;
-
-		return fragment;
-	}
-
+	@SuppressWarnings("unchecked")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -37,9 +32,10 @@ public class MenuFragment extends Fragment {
 		final Context context = inflater.getContext();
 
 		final ListView menuLv = new ListView(context);
+		
+		mDatas = (ArrayList<MenuItemModel>) getArguments().getSerializable(MENU_PARAMS_KEY);
 
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-				context, textArrayResId, android.R.layout.simple_list_item_1);
+		mAdapter = new MenuAdapter(mDatas, context);
 
 		menuLv.setOnItemClickListener(new OnItemClickListener() {
 
@@ -49,55 +45,15 @@ public class MenuFragment extends Fragment {
 
 				if (mSwitchItemListener != null) {
 
-					try {
-						MenuItemModel itemModel = new MenuItemModel();
-
-						itemModel.id = position;
-
-						itemModel.title = getResources().getStringArray(
-								textArrayResId)[position];
-
-						String[] menuTypeValues = getResources()
-								.getStringArray(R.array.slide_item_showtype_ids);
-
-						itemModel.type = ContentTemplateType
-								.valueOf(menuTypeValues[position]);
-
-						Bundle args = new Bundle();
-
-						switch (itemModel.type) {
-						case isWebView:
-							args.putString(WebViewFragment.WEB_URI_KEY,
-									getWebAssetUri("parkour_2.html"));
-							break;
-						case isGrid:
-
-							break;
-						case isList:
-							args.putInt(TitleFragment.TITLE_SLIDE_INDEX_KEY, 5);
-							break;
-						default:
-							break;
-						}
-						
-						itemModel.args = args;
-						
-						mSwitchItemListener.onSwitchItemEvent(itemModel);
-					} catch (NotFoundException e) {
-						e.printStackTrace();
-					}
+					mSwitchItemListener.onSwitchItemEvent(mAdapter
+							.getItem(position));
 				}
 			}
 		});
 
-		menuLv.setAdapter(adapter);
+		menuLv.setAdapter(mAdapter);
 
 		return menuLv;
-	}
-
-	public String getWebAssetUri(String relativeDir) {
-
-		return "file:///android_asset/" + relativeDir;
 	}
 
 	public void setOnSwitchItemListener(OnSwitchItemListener listener) {

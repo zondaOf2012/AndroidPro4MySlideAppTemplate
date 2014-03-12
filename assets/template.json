@@ -1,0 +1,48 @@
+[{
+	"type": "isWebView",
+	"web_uri": "t_web\/parkour_2.html",
+	"title": "游戏简介",
+	"id": 0
+},
+{
+	"type": "isGrid",
+	"grid_item_postfix": ".jpg",
+	"grid_item_prefix": "t_grid\/pet\/pet_",
+	"grid_count": 45,
+	"grid_first_index": 1,
+	"grid_detail_prefix": "t_grid\/pet_details\/pet_details_",
+	"grid_detail_postfix": ".html",
+	"title": "跑酷坐骑大全",
+	"id": 1
+},
+{
+	"type": "isGrid",
+	"grid_item_postfix": ".jpg",
+	"grid_item_prefix": "t_grid\/role\/role_",
+	"grid_count": 9,
+	"grid_first_index": 1,
+	"grid_detail_prefix": "t_grid\/role_details\/role_details_",
+	"grid_detail_postfix": ".html",
+	"title": "跑酷角色大全",
+	"id": 2
+},
+{
+	"type": "isList",
+	"params": {
+		"天天酷跑刷分攻略汇总 11月24日全部亲测": "t_list\/5_1.html",
+		"天天酷跑审判女王和金枪小帅哪个好": "t_list\/5_2.html",
+		"天天酷跑魔女娜娜，音速小飞和金枪小帅哪个好": "t_list\/5_3.html",
+		"天天酷跑魔女娜娜满级属性": "t_list\/5_4.html",
+		"天天酷跑百变萝莉满级属性": "t_list\/5_5.html"
+	},
+	"title": "高手进阶",
+	"id": 3
+},
+{
+	"type": "isGrid",
+	"params": {
+		"参数Key": "参数Value"
+	},
+	"title": "侧边栏Title名",
+	"id": 4
+}]

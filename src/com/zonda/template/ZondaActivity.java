@@ -1,11 +1,22 @@
 package com.zonda.template;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.util.SparseArrayCompat;
 import android.util.DisplayMetrics;
+import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 import com.zonda.template.MenuFragment.OnSwitchItemListener;
 import com.zonda.template.slide.SlidingFragmentActivity;
 import com.zonda.template.slide.SlidingMenu;
@@ -15,28 +26,38 @@ public class ZondaActivity extends SlidingFragmentActivity implements
 
 	int mCurContentId = 0;
 
-	Fragment mContentFragment;
+	BaseFragment mContentFragment;
 
 	SparseArrayCompat<RestoreInfo> mRestoreInfos = new SparseArrayCompat<RestoreInfo>(
 			5);
+	
+	private ArrayList<MenuItemModel> mDatas;
 
 	@Override
 	public void onCreate(Bundle arg0) {
 
 		super.onCreate(arg0);
-
+		
+		init();
+		
 		setContentView(R.layout.activity_main);
-
+		
 		setBehindContentView(R.layout.strategy_menu);
 
-		mContentFragment = ImageGridFragment.getInstance(
-				ImageGridFragment.GRID_PETS_TYPE, "");
+		mContentFragment = new WebViewFragment();
+		
+		mContentFragment.initInstance(mDatas.get(0));
 
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.content_fragment, mContentFragment).commit();
 
-		MenuFragment menuFragment = MenuFragment
-				.getInstance(R.array.slide_item_types);
+		MenuFragment menuFragment = new MenuFragment();
+		
+		Bundle args = new Bundle();
+		
+		args.putSerializable(MenuFragment.MENU_PARAMS_KEY, mDatas);
+		
+		menuFragment.setArguments(args);
 
 		menuFragment.setOnSwitchItemListener(this);
 
@@ -45,7 +66,27 @@ public class ZondaActivity extends SlidingFragmentActivity implements
 
 		ensureSlidMenu();
 	}
-
+	
+	void init(){
+		
+		try {
+			
+			InputStream in = getAssets().open("template.json");
+			
+			Gson gson = new GsonBuilder().serializeNulls().create();
+			
+			Type type = new TypeToken<ArrayList<MenuItemModel>>(){}.getType();
+			
+			mDatas = gson.fromJson(new JsonReader(new InputStreamReader(in)), type);
+			
+			Log.i("TAG", " init : " + (mDatas != null ? mDatas.size() : 0));
+			
+			in.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	public void onPostCreate(Bundle savedInstanceState) {
 
@@ -59,33 +100,29 @@ public class ZondaActivity extends SlidingFragmentActivity implements
 
 		if (mCurContentId != itemModel.id) {
 
-			Fragment fragment = null;
+			BaseFragment fragment = null;
 			
 
 			switch (itemModel.type) {
 			case isGrid:
 
-				fragment = ImageGridFragment.getInstance(
-						ImageGridFragment.GRID_PETS_TYPE, "");
+				fragment = new ImageGridFragment();
 				break;
 			case isList:
 
 				fragment = new TitleFragment();
-
-				fragment.setArguments(itemModel.args);
-
 				break;
 			case isWebView:
 
 				fragment = new WebViewFragment();
-				
-				fragment.setArguments(itemModel.args);
 				break;
 			default:
 				break;
 			}
 
 			if (fragment != null) {
+				
+				fragment.initInstance(itemModel);
 
 				FragmentTransaction ft = getSupportFragmentManager()
 						.beginTransaction();

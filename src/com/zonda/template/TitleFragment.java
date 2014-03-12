@@ -27,7 +27,7 @@ public class TitleFragment extends BaseFragment implements OnItemClickListener {
 		mDatas = new ArrayList<TitleModel>();
 
 		CharSequence[] titleArray = getResources().getTextArray(
-				R.array.slide_title_items);
+				R.array.slide_menu_item_titles);
 
 		TitleModel titleModel;
 
@@ -86,11 +86,7 @@ public class TitleFragment extends BaseFragment implements OnItemClickListener {
 
 		WebViewFragment fragment = new WebViewFragment();
 
-		Bundle args = new Bundle();
-
-		args.putString(WebViewFragment.WEB_URI_KEY, getItemUri(position));
-
-		fragment.setArguments(args);
+		fragment.initInstance(getParams());
 
 		getFragmentManager()
 				.beginTransaction()

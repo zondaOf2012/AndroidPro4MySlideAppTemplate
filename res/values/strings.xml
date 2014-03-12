@@ -5,7 +5,7 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
 
-    <string-array name="slide_item_types">
+    <string-array name="slide_menu_item_titles">
         <item>游戏简介</item>
         <item>游戏角色</item>
         <item>游戏道具</item>
@@ -14,7 +14,7 @@
         <item>游戏工具</item>
     </string-array>
     
-    <string-array name="slide_item_showtype_ids">
+    <string-array name="slide_menu_item_types">
         <item>isGrid</item>
         <item>isWebView</item>
         <item>isList</item>
@@ -23,12 +23,18 @@
         <item>isGrid</item>
     </string-array>
     
-    <string-array name="slide_title_items">
+    <string-array name="slide_conent_list_items">
         <item>天天酷跑刷分攻略汇总 11月24日全部亲测</item>
         <item>天天酷跑审判女王和金枪小帅哪个好</item>
         <item>天天酷跑魔女娜娜，音速小飞和金枪小帅哪个好</item>
         <item>天天酷跑魔女娜娜满级属性</item>
         <item>天天酷跑百变萝莉满级属性</item>
+    </string-array>
+    
+    <string-array name="slide_content_webview_items">
+    </string-array>
+    
+    <string-array name="slide_content_grid_items">
     </string-array>
 
 </resources>

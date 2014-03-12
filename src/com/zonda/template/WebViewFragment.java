@@ -8,8 +8,6 @@ import android.webkit.WebView;
 
 public class WebViewFragment extends BaseFragment {
 
-	public static final String WEB_URI_KEY = "web_uri_key";
-
 	private WebView mWebView;
 
 	private boolean mIsWebViewAvailable;
@@ -17,6 +15,11 @@ public class WebViewFragment extends BaseFragment {
 	public WebViewFragment() {
 		
 		super();
+	}
+	
+	public String getWebAssetUri(String relativeDir) {
+
+		return "file:///android_asset/" + relativeDir;
 	}
 
 	@Override
@@ -30,7 +33,7 @@ public class WebViewFragment extends BaseFragment {
 
 		if (getArguments() != null) {
 
-			mWebView.loadUrl(getArguments().getString(WEB_URI_KEY));
+			mWebView.loadUrl(getWebAssetUri(getParams().web_uri));
 		}
 
 		return mWebView;
