@@ -1,9 +1,12 @@
 package com.zonda.template;
 
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebSettings.ZoomDensity;
 import android.webkit.WebView;
 
 public class WebViewFragment extends BaseFragment {
@@ -29,6 +32,7 @@ public class WebViewFragment extends BaseFragment {
 			mWebView.destroy();
 		}
 		mWebView = new WebView(getActivity());
+		
 		mIsWebViewAvailable = true;
 
 		if (getArguments() != null) {
@@ -37,6 +41,37 @@ public class WebViewFragment extends BaseFragment {
 		}
 
 		return mWebView;
+	}
+	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+
+		super.onActivityCreated(savedInstanceState);
+		
+//		WebSettings webSettings = mWebView.getSettings();
+//        webSettings.setSupportZoom(true);
+//        webSettings.setJavaScriptEnabled(true);
+//        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+//        webSettings.setBuiltInZoomControls(true);// support zoom
+//        webSettings.setPluginsEnabled(true);// support flash
+//        webSettings.setUseWideViewPort(true);
+//        webSettings.setLoadWithOverviewMode(true);
+//
+//        DisplayMetrics metrics = new DisplayMetrics();
+//        getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
+//        int mDensity = metrics.densityDpi;
+//        // DebugLog.d(TAG, "densityDpi = " + mDensity);
+//        if (mDensity == 240) {
+//            webSettings.setDefaultZoom(ZoomDensity.FAR);
+//        } else if (mDensity == 160) {
+//            webSettings.setDefaultZoom(ZoomDensity.MEDIUM);
+//        } else if (mDensity == 120) {
+//            webSettings.setDefaultZoom(ZoomDensity.CLOSE);
+//        } else if (mDensity == DisplayMetrics.DENSITY_XHIGH) {
+//            webSettings.setDefaultZoom(ZoomDensity.FAR);
+//        } else if (mDensity == DisplayMetrics.DENSITY_TV) {
+//            webSettings.setDefaultZoom(ZoomDensity.FAR);
+//        }
 	}
 
 	@Override
