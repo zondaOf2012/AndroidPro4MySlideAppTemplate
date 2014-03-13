@@ -15,4 +15,6 @@ public class Contants {
 	public static String[] PET_DETAILS = { "http://news.4399.com/gonglue/ttpk/chongwu/m/344403.html" };
 	
 	public static final String DYD_KEY = "11154c8bd0ae27fd549f9ae8cada1850";
+	
+	public static final String HEIZI_KEY = "0123456789abcdef0123456789abcdef";
 }

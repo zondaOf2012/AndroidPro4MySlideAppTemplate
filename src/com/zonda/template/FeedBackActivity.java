@@ -34,7 +34,7 @@ public class FeedBackActivity extends BaseActivity {
 		agent = new FeedbackAgent(this);
 
 		defaultConversation = agent.getDefaultConversation();
-		
+
 		sync();
 	}
 
@@ -44,6 +44,11 @@ public class FeedBackActivity extends BaseActivity {
 
 			@Override
 			public void onSendUserReply(List<Reply> arg0) {
+
+				if (arg0 == null) {
+
+					return;
+				}
 
 				Toast.makeText(
 						getApplicationContext(),
@@ -55,6 +60,11 @@ public class FeedBackActivity extends BaseActivity {
 
 			@Override
 			public void onReceiveDevReply(List<DevReply> arg0) {
+
+				if (arg0 == null) {
+
+					return;
+				}
 
 				Toast.makeText(
 						getApplicationContext(),
@@ -78,7 +88,7 @@ public class FeedBackActivity extends BaseActivity {
 		}
 
 		defaultConversation.addUserReply(feedbackContent);
-		
+
 		sync();
 	}
 }

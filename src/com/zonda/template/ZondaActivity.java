@@ -7,12 +7,16 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.util.SparseArrayCompat;
+import android.support.v7.app.ActionBar;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.animation.Interpolator;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -21,6 +25,7 @@ import com.google.gson.stream.JsonReader;
 import com.zonda.template.MenuFragment.OnSwitchItemListener;
 import com.zonda.template.slide.SlidingFragmentActivity;
 import com.zonda.template.slide.SlidingMenu;
+import com.zonda.template.slide.SlidingMenu.CanvasTransformer;
 
 public class ZondaActivity extends SlidingFragmentActivity implements
 		OnSwitchItemListener {
@@ -66,6 +71,9 @@ public class ZondaActivity extends SlidingFragmentActivity implements
 				.replace(R.id.strategy_menu, menuFragment).commit();
 
 		ensureSlidMenu();
+		
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setHomeButtonEnabled(true);
 	}
 	
 	void init(){
@@ -184,7 +192,26 @@ public class ZondaActivity extends SlidingFragmentActivity implements
 		sm.setMode(SlidingMenu.LEFT);
 
 		sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		
+		sm.setBehindScrollScale(0.0f);
+		
+		sm.setBehindCanvasTransformer(mTransformer);
 	}
+	
+	private CanvasTransformer mTransformer = new CanvasTransformer() {
+		@Override
+		public void transformCanvas(Canvas canvas, float percentOpen) {
+			canvas.translate(0, canvas.getHeight()*(1-interp.getInterpolation(percentOpen)));
+		}			
+	};
+	
+	private static Interpolator interp = new Interpolator() {
+		@Override
+		public float getInterpolation(float t) {
+			t -= 1.0f;
+			return t * t * t + 1.0f;
+		}		
+	};
 
 	static class RestoreInfo {
 
