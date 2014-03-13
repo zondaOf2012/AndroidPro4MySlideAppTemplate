@@ -7,4 +7,5 @@
     <dimen name="image_thumbnail_spacing">1dp</dimen>
     <dimen name="image_detail_pager_margin">40dp</dimen>
 
+    <dimen name="slide_menu_header_height">128dp</dimen>
 </resources>

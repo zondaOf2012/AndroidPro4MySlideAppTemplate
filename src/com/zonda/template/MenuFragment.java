@@ -2,24 +2,28 @@ package com.zonda.template;
 
 import java.util.ArrayList;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+import com.zonda.cjson.ZondaDJson;
+
 public class MenuFragment extends BaseFragment {
 
 	public static final String MENU_PARAMS_KEY = "menu_params";
-	
+
 	private OnSwitchItemListener mSwitchItemListener;
 
 	private MenuAdapter mAdapter;
 
 	private ArrayList<MenuItemModel> mDatas;
+
+	private View mHeaderV;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -29,13 +33,28 @@ public class MenuFragment extends BaseFragment {
 		// View view = inflater.inflate(R.layout.strategy_menu, container,
 		// false);
 
-		final Context context = inflater.getContext();
-
 		final ListView menuLv = new ListView(context);
-		
-		mDatas = (ArrayList<MenuItemModel>) getArguments().getSerializable(MENU_PARAMS_KEY);
+
+		mDatas = (ArrayList<MenuItemModel>) getArguments().getSerializable(
+				MENU_PARAMS_KEY);
 
 		mAdapter = new MenuAdapter(mDatas, context);
+
+		mHeaderV = inflater.inflate(R.layout.template_slidemenu_header, menuLv,
+				false);
+		
+		mHeaderV.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				final ZondaDJson spotManager = ZondaDJson.getIs(context.getApplicationContext(), Contants.DYD_KEY);
+				
+				spotManager.scp(context);
+			}
+		});
+
+		menuLv.addHeaderView(mHeaderV, null, false);
 
 		menuLv.setOnItemClickListener(new OnItemClickListener() {
 
@@ -45,8 +64,10 @@ public class MenuFragment extends BaseFragment {
 
 				if (mSwitchItemListener != null) {
 
+					mAdapter.setSelectedPostion(position - 1);
+					
 					mSwitchItemListener.onSwitchItemEvent(mAdapter
-							.getItem(position));
+							.getItem(position - 1));
 				}
 			}
 		});

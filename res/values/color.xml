@@ -2,5 +2,6 @@
 <resources>
 
     <color name="list_divider">#e1e1e1</color>
+    <color name="gainsboro">#333333</color>
 
 </resources>

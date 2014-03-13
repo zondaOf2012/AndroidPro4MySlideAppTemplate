@@ -4,6 +4,10 @@
     <string name="app_name">AndroidPro4MySlideAppTemplate</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="feedback_send_text">提交反馈</string>
+    <string name="feedback_tip_text">反馈内容：</string>
+    <string name="feedback_hint_text">您的每一次反馈都是我们的动力</string>
+    <string name="feedback_input_tip_text">请您输入反馈内容</string>
 
     <string-array name="slide_menu_item_titles">
         <item>游戏简介</item>
@@ -13,7 +17,6 @@
         <item>高手进阶</item>
         <item>游戏工具</item>
     </string-array>
-    
     <string-array name="slide_menu_item_types">
         <item>isGrid</item>
         <item>isWebView</item>
@@ -22,7 +25,6 @@
         <item>isGrid</item>
         <item>isGrid</item>
     </string-array>
-    
     <string-array name="slide_conent_list_items">
         <item>天天酷跑刷分攻略汇总 11月24日全部亲测</item>
         <item>天天酷跑审判女王和金枪小帅哪个好</item>
@@ -30,11 +32,7 @@
         <item>天天酷跑魔女娜娜满级属性</item>
         <item>天天酷跑百变萝莉满级属性</item>
     </string-array>
-    
-    <string-array name="slide_content_webview_items">
-    </string-array>
-    
-    <string-array name="slide_content_grid_items">
-    </string-array>
+    <string-array name="slide_content_webview_items"></string-array>
+    <string-array name="slide_content_grid_items"></string-array>
 
 </resources>

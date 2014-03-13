@@ -37,12 +37,4 @@
 	},
 	"title": "高手进阶",
 	"id": 3
-},
-{
-	"type": "isGrid",
-	"params": {
-		"参数Key": "参数Value"
-	},
-	"title": "侧边栏Title名",
-	"id": 4
 }]

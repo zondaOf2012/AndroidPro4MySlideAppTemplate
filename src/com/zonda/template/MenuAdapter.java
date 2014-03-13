@@ -3,10 +3,12 @@ package com.zonda.template;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MenuAdapter extends BaseAdapter {
@@ -14,12 +16,26 @@ public class MenuAdapter extends BaseAdapter {
 	private Context mContext;
 	
 	private List<MenuItemModel> mDatas;
+
+	private int selectedPostion = 0;
 	
 	public MenuAdapter(List<MenuItemModel> datas, Context context){
 		
 		this.mDatas = datas;
 		
 		this.mContext = context;
+	}
+	
+	public void setSelectedPostion(int position){
+		
+		if(position < 0){
+			
+			return;
+		}
+		
+		selectedPostion = position;
+		
+		notifyDataSetChanged();
 	}
 	
 	@Override
@@ -49,7 +65,7 @@ public class MenuAdapter extends BaseAdapter {
 			
 			LayoutInflater inflater = LayoutInflater.from(mContext);
 			
-			convertView = inflater.inflate(R.layout.template_slidemenu, parent, false);
+			convertView = inflater.inflate(R.layout.template_slidemenu_item, parent, false);
 
 			holder = new ViewHolder();
 			
@@ -61,6 +77,14 @@ public class MenuAdapter extends BaseAdapter {
 		holder = (ViewHolder) convertView.getTag();
 		
 		holder.tv.setText(getItem(position).title);
+		
+		if(position == selectedPostion){
+			
+			holder.tv.setTextColor(Color.BLUE);
+		}else{
+			
+			holder.tv.setTextColor(Color.BLACK);
+		}
 		
 		return convertView;
 	}
