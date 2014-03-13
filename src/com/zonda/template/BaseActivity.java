@@ -23,8 +23,8 @@ public class BaseActivity extends FragmentActivity {
 		super.onResume();
 		
 		MobclickAgent.onResume(this);
-		final ZondaDJson spotManager = ZondaDJson.getIs(getApplicationContext(), Contants.DYD_KEY);
-		spotManager.scp(this);
+//		final ZondaDJson spotManager = ZondaDJson.getIs(getApplicationContext(), Contants.DYD_KEY);
+//		spotManager.scp(this);
 	}
 	
 	@Override
