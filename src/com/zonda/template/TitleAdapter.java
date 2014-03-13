@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class TitleAdapter extends BaseAdapter {
@@ -52,10 +53,21 @@ public class TitleAdapter extends BaseAdapter {
 			holder.titleTv = (TextView) convertView
 					.findViewById(R.id.column_title);
 
+			holder.iconIv = (ImageView) convertView
+					.findViewById(R.id.column_timer_axis);
+
 			convertView.setTag(holder);
 		} else {
 
 			holder = (TitleViewHolder) convertView.getTag();
+		}
+
+		if (position % 2 == 0) {
+
+			holder.iconIv.setImageResource(R.drawable.title_axis_red);
+		} else {
+
+			holder.iconIv.setImageResource(R.drawable.title_axis_blue);
 		}
 
 		holder.titleTv.setText(getItem(position).titleText);
@@ -66,6 +78,8 @@ public class TitleAdapter extends BaseAdapter {
 	class TitleViewHolder {
 
 		public TextView titleTv;
+
+		public ImageView iconIv;
 	}
 
 }

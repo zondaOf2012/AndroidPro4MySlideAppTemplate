@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -78,6 +79,16 @@ public class ZondaActivity extends SlidingFragmentActivity implements
 			Type type = new TypeToken<ArrayList<MenuItemModel>>(){}.getType();
 			
 			mDatas = gson.fromJson(new JsonReader(new InputStreamReader(in)), type);
+
+			MenuItemModel aboutUsItem = new MenuItemModel();
+			
+			aboutUsItem.id = mDatas.size();
+			
+			aboutUsItem.title = "用户反馈";
+			
+			aboutUsItem.type = ContentTemplateType.isAboutUs;
+			
+			mDatas.add(aboutUsItem);
 			
 			Log.i("TAG", " init : " + (mDatas != null ? mDatas.size() : 0));
 			
@@ -97,6 +108,15 @@ public class ZondaActivity extends SlidingFragmentActivity implements
 
 	@Override
 	public void onSwitchItemEvent(MenuItemModel itemModel) {
+		
+		if(itemModel.type == ContentTemplateType.isAboutUs){
+			
+			Intent intent = new Intent(this, FeedBackActivity.class);
+			
+			startActivity(intent);
+			
+			return;
+		}
 
 		if (mCurContentId != itemModel.id) {
 
@@ -146,7 +166,7 @@ public class ZondaActivity extends SlidingFragmentActivity implements
 
 		getWindowManager().getDefaultDisplay().getMetrics(metric);
 
-		int offset = metric.widthPixels * 2 / 5;
+		int offset = metric.widthPixels * 1 / 4;
 
 		// sm.setBehindOffsetRes(R.dimen.sns_behind_offset);
 		sm.setBehindOffset(offset);

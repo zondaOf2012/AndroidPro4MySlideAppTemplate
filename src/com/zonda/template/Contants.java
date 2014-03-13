@@ -13,4 +13,6 @@ public class Contants {
 			"Ä§Å®ÄÈÄÈ", "Ã¨Ð¡ÃÈ", "µ¶·æ±¦±´", "Ë«Ç¹Ð¡Ë§" };
 
 	public static String[] PET_DETAILS = { "http://news.4399.com/gonglue/ttpk/chongwu/m/344403.html" };
+	
+	public static final String DYD_KEY = "11154c8bd0ae27fd549f9ae8cada1850";
 }

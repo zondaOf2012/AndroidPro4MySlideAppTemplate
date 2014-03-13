@@ -1,7 +1,9 @@
 package com.zonda.template;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -26,17 +28,18 @@ public class TitleFragment extends BaseFragment implements OnItemClickListener {
 
 		mDatas = new ArrayList<TitleModel>();
 
-		CharSequence[] titleArray = getResources().getTextArray(
-				R.array.slide_menu_item_titles);
-
+		HashMap<String, String> listParams = getParams().params;
+		
 		TitleModel titleModel;
-
-		for (CharSequence titleText : titleArray) {
-
+		
+		for (Entry<String, String> titleEntry : listParams.entrySet()) {
+			
 			titleModel = new TitleModel();
-
-			titleModel.titleText = titleText.toString();
-
+			
+			titleModel.titleText = titleEntry.getKey();
+			
+			titleModel.uri = titleEntry.getValue();
+			
 			mDatas.add(titleModel);
 		}
 	}
@@ -63,18 +66,6 @@ public class TitleFragment extends BaseFragment implements OnItemClickListener {
 		return view;
 	}
 
-	String getItemUri(int position) {
-
-		int slideIndex = 0;
-
-		if (getArguments() != null) {
-
-			slideIndex = getArguments().getInt(TITLE_SLIDE_INDEX_KEY, 0);
-		}
-		return "file:///android_asset/" + slideIndex + "_" + (position + 1)
-				+ ".html";
-	}
-
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
@@ -86,6 +77,8 @@ public class TitleFragment extends BaseFragment implements OnItemClickListener {
 
 		WebViewFragment fragment = new WebViewFragment();
 
+		getParams().web_uri = mDatas.get(position).uri;
+		
 		fragment.initInstance(getParams());
 
 		getFragmentManager()
