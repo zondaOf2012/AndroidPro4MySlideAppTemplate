@@ -1,8 +1,8 @@
 package com.zonda.template;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
 
 import com.umeng.analytics.MobclickAgent;
 import com.zonda.cjson.ZondaDJson;
@@ -27,6 +27,12 @@ public class BaseActivity extends ActionBarActivity {
 		mCtmManager = Ctm.getInstance();
 
 		mCtmManager.setId(this, Contants.HEIZI_KEY);
+		
+	}
+	
+	@Override
+	public boolean onMenuOpened(int featureId, Menu menu) {
+		return super.onMenuOpened(featureId, menu);
 	}
 
 	@Override
