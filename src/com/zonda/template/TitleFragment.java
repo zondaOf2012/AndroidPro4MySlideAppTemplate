@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -29,17 +30,17 @@ public class TitleFragment extends BaseFragment implements OnItemClickListener {
 		mDatas = new ArrayList<TitleModel>();
 
 		HashMap<String, String> listParams = getParams().params;
-		
+
 		TitleModel titleModel;
-		
+
 		for (Entry<String, String> titleEntry : listParams.entrySet()) {
-			
+
 			titleModel = new TitleModel();
-			
+
 			titleModel.titleText = titleEntry.getKey();
-			
+
 			titleModel.uri = titleEntry.getValue();
-			
+
 			mDatas.add(titleModel);
 		}
 	}
@@ -75,19 +76,28 @@ public class TitleFragment extends BaseFragment implements OnItemClickListener {
 
 	void forwardContent(int position) {
 
-		WebViewFragment fragment = new WebViewFragment();
-
+		Intent intent = new Intent(context, WebViewFragmentActivity.class);
+		
 		getParams().web_uri = mDatas.get(position).uri;
 		
-		fragment.initInstance(getParams());
+		intent.putExtra(WebViewFragmentActivity.WEBVIEW_PARAMS_KEY,
+				getParams());
 
-		getFragmentManager()
-				.beginTransaction()
-				// .setCustomAnimations(R.anim.a_to_b_of_in,
-				// R.anim.a_to_b_of_out,
-				// R.anim.push_right_in, R.anim.push_right_out)
-				.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-				.replace(android.R.id.content, fragment).addToBackStack(null)
-				.commit();
+		startActivity(intent);
+
+		// WebViewFragment fragment = new WebViewFragment();
+		//
+		// getParams().web_uri = mDatas.get(position).uri;
+		//
+		// fragment.initInstance(getParams());
+		//
+		// getFragmentManager()
+		// .beginTransaction()
+		// // .setCustomAnimations(R.anim.a_to_b_of_in,
+		// // R.anim.a_to_b_of_out,
+		// // R.anim.push_right_in, R.anim.push_right_out)
+		// .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+		// .replace(android.R.id.content, fragment).addToBackStack(null)
+		// .commit();
 	}
 }
