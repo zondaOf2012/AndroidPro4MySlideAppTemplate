@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">AndroidPro4MySlideAppTemplate</string>
+    <string name="app_name">天天跑酷2014最新攻略</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="feedback_send_text">提交反馈</string>

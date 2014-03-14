@@ -14,6 +14,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.util.SparseArrayCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.animation.Interpolator;
 
 import com.google.gson.Gson;
@@ -67,9 +68,26 @@ public class ZondaActivity extends SlidingFragmentActivity implements
 				.replace(R.id.strategy_menu, menuFragment).commit();
 
 		ensureSlidMenu();
+	}
+	
+	protected boolean isActionBarFinish(){
 		
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		getSupportActionBar().setHomeButtonEnabled(true);
+		return false;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			
+			showMenu();
+			break;
+		default:
+			break;
+		}
+		
+		return super.onOptionsItemSelected(item);
 	}
 	
 	void init(){
@@ -114,6 +132,8 @@ public class ZondaActivity extends SlidingFragmentActivity implements
 	public void onSwitchItemEvent(MenuItemModel itemModel) {
 		
 		if(itemModel.type == ContentTemplateType.isAboutUs){
+			
+			mCurContentId = itemModel.id;
 			
 			Intent intent = new Intent(this, FeedBackActivity.class);
 			

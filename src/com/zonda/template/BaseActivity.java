@@ -3,6 +3,7 @@ package com.zonda.template;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import com.umeng.analytics.MobclickAgent;
 import com.zonda.cjson.ZondaDJson;
@@ -32,6 +33,33 @@ public class BaseActivity extends ActionBarActivity {
 		mCtmManager.setId(this, Contants.HEIZI_KEY);
 
 		mShareDB = ZondaShareDB.getInstance(this);
+		
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		
+		getSupportActionBar().setHomeButtonEnabled(true);
+	}
+	
+	protected boolean isActionBarFinish(){
+		
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			
+			if(isActionBarFinish()){
+				
+				finish();
+			}
+			break;
+		default:
+			break;
+		}
+		
+		return super.onOptionsItemSelected(item);
 	}
 
 	@Override
