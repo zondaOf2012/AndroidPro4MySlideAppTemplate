@@ -8,6 +8,7 @@
     <string name="feedback_tip_text">反馈内容：</string>
     <string name="feedback_hint_text">您的每一次反馈都是我们的动力</string>
     <string name="feedback_input_tip_text">请您输入反馈内容</string>
+    <string name="feedback_success">您已成功反馈</string>
 
     <string-array name="slide_menu_item_titles">
         <item>游戏简介</item>

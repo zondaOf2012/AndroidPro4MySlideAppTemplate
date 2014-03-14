@@ -50,12 +50,12 @@ public class FeedBackActivity extends BaseActivity {
 					return;
 				}
 
-				Toast.makeText(
-						getApplicationContext(),
-						"user-reply: "
-								+ (arg0.isEmpty() ? "0" : arg0.get(0)
-										.getContent()), Toast.LENGTH_SHORT)
-						.show();
+				// Toast.makeText(
+				// getApplicationContext(),
+				// "user-reply: "
+				// + (arg0.isEmpty() ? "0" : arg0.get(0)
+				// .getContent()), Toast.LENGTH_SHORT)
+				// .show();
 			}
 
 			@Override
@@ -66,12 +66,12 @@ public class FeedBackActivity extends BaseActivity {
 					return;
 				}
 
-				Toast.makeText(
-						getApplicationContext(),
-						"onReceiveDevReply: "
-								+ (arg0.isEmpty() ? "0" : arg0.get(0)
-										.getContent()), Toast.LENGTH_SHORT)
-						.show();
+				// Toast.makeText(
+				// getApplicationContext(),
+				// "onReceiveDevReply: "
+				// + (arg0.isEmpty() ? "0" : arg0.get(0)
+				// .getContent()), Toast.LENGTH_SHORT)
+				// .show();
 			}
 		});
 	}
@@ -86,9 +86,12 @@ public class FeedBackActivity extends BaseActivity {
 
 			return;
 		}
-
+		
 		defaultConversation.addUserReply(feedbackContent);
 
 		sync();
+		
+		feedBackEt.setText("");
+		feedBackEt.setHint(R.string.feedback_success);
 	}
 }

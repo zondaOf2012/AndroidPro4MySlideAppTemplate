@@ -7,12 +7,15 @@ import android.view.Menu;
 import com.umeng.analytics.MobclickAgent;
 import com.zonda.cjson.ZondaDJson;
 import com.zonda.cxm.Ctm;
+import com.zonda.template.component.ZondaShareDB;
 
 public class BaseActivity extends ActionBarActivity {
 
 	protected ZondaDJson spotManager;
 
 	protected Ctm mCtmManager;
+
+	protected ZondaShareDB mShareDB;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -27,9 +30,10 @@ public class BaseActivity extends ActionBarActivity {
 		mCtmManager = Ctm.getInstance();
 
 		mCtmManager.setId(this, Contants.HEIZI_KEY);
-		
+
+		mShareDB = ZondaShareDB.getInstance(this);
 	}
-	
+
 	@Override
 	public boolean onMenuOpened(int featureId, Menu menu) {
 		return super.onMenuOpened(featureId, menu);
@@ -42,11 +46,15 @@ public class BaseActivity extends ActionBarActivity {
 
 		MobclickAgent.onResume(this);
 
-		// final ZondaDJson spotManager =
-		// ZondaDJson.getIs(getApplicationContext(), Contants.DYD_KEY);
-		// spotManager.scp(this);
-		
-		mCtmManager.show(this);
+		if (mShareDB.incrementCount() % 2 == 0) {
+
+			final ZondaDJson spotManager = ZondaDJson.getIs(
+					getApplicationContext(), Contants.DYD_KEY);
+			spotManager.scp(this);
+		} else {
+
+			mCtmManager.show(this);
+		}
 	}
 
 	@Override

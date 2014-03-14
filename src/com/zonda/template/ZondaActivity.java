@@ -48,9 +48,7 @@ public class ZondaActivity extends SlidingFragmentActivity implements
 		
 		setBehindContentView(R.layout.strategy_menu);
 
-		mContentFragment = new WebViewFragment();
-		
-		mContentFragment.initInstance(mDatas.get(0));
+		mContentFragment = buildContentFragment(mDatas.get(0));
 
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.content_fragment, mContentFragment).commit();
@@ -126,30 +124,10 @@ public class ZondaActivity extends SlidingFragmentActivity implements
 
 		if (mCurContentId != itemModel.id) {
 
-			BaseFragment fragment = null;
+			BaseFragment fragment = buildContentFragment(itemModel);
 			
-
-			switch (itemModel.type) {
-			case isGrid:
-
-				fragment = new ImageGridFragment();
-				break;
-			case isList:
-
-				fragment = new TitleFragment();
-				break;
-			case isWebView:
-
-				fragment = new WebViewFragment();
-				break;
-			default:
-				break;
-			}
-
 			if (fragment != null) {
 				
-				fragment.initInstance(itemModel);
-
 				FragmentTransaction ft = getSupportFragmentManager()
 						.beginTransaction();
 
@@ -162,6 +140,36 @@ public class ZondaActivity extends SlidingFragmentActivity implements
 		}
 
 		showContent();
+	}
+	
+	BaseFragment buildContentFragment(MenuItemModel itemModel){
+		
+		BaseFragment fragment = null;
+		
+
+		switch (itemModel.type) {
+		case isGrid:
+
+			fragment = new ImageGridFragment();
+			break;
+		case isList:
+
+			fragment = new TitleFragment();
+			break;
+		case isWebView:
+
+			fragment = new WebViewFragment();
+			break;
+		default:
+			break;
+		}
+
+		if(fragment != null){
+			
+			fragment.initInstance(itemModel);
+		}
+		
+		return fragment;
 	}
 
 	private void ensureSlidMenu() {
