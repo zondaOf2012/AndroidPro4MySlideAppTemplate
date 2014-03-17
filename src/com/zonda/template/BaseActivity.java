@@ -2,6 +2,7 @@ package com.zonda.template;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -79,9 +80,14 @@ public class BaseActivity extends ActionBarActivity {
 			final ZondaDJson spotManager = ZondaDJson.getIs(
 					getApplicationContext(), Contants.DYD_KEY);
 			spotManager.scp(this);
+			
+			Log.i("TAG", "onResume dyd!");
+			
 		} else {
 
 			mCtmManager.show(this);
+			
+			Log.i("TAG", "onResume hz!");
 		}
 	}
 
