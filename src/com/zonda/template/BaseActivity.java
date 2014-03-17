@@ -35,9 +35,16 @@ public class BaseActivity extends ActionBarActivity {
 
 		mShareDB = ZondaShareDB.getInstance(this);
 		
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		if(getSupportActionBar() != null){
+			
+			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+			
+			getSupportActionBar().setHomeButtonEnabled(true);
+		}else{
+			
+			Log.i("TAG", "getSupportActionBar------------is null");
+		}
 		
-		getSupportActionBar().setHomeButtonEnabled(true);
 	}
 	
 	protected boolean isActionBarFinish(){

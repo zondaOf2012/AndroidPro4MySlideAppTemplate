@@ -4,6 +4,7 @@ import com.zonda.template.BaseActivity;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -17,7 +18,11 @@ public class SlidingFragmentActivity extends BaseActivity implements SlidingActi
 	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
+		
+		Log.i("TAG", "SlidingFragmentActivity----onCreate--------is run!");
+		
 		mHelper = new SlidingActivityHelper(this);
 		mHelper.onCreate(savedInstanceState);
 	}
@@ -39,7 +44,17 @@ public class SlidingFragmentActivity extends BaseActivity implements SlidingActi
 		View v = super.findViewById(id);
 		if (v != null)
 			return v;
-		return mHelper.findViewById(id);
+		
+		if(mHelper != null){
+			
+			Log.i("TAG", "findViewbyId------------is not null");
+			
+			return mHelper.findViewById(id);
+		}else{
+			
+			Log.i("TAG", "findViewbyId------------is null");
+		}
+		return null;
 	}
 
 	/* (non-Javadoc)
