@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import com.zonda.second.R;
 import com.zonda.template.MenuFragment.OnSwitchItemListener;
 import com.zonda.template.slide.SlidingFragmentActivity;
 import com.zonda.template.slide.SlidingMenu;

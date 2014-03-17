@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 
-import com.zonda.template.R;
+import com.zonda.second.R;
 
 public class SlidingActivityHelper {
 

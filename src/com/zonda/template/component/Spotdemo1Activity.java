@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.zonda.cjson.ZondaDJson;
-import com.zonda.template.R;
+import com.zonda.second.R;
 
 public class Spotdemo1Activity extends Activity {
 

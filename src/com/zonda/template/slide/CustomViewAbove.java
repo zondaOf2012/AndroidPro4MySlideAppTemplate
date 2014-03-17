@@ -23,7 +23,7 @@ import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 import android.widget.Scroller;
 
-import com.zonda.template.R;
+import com.zonda.second.R;
 import com.zonda.template.slide.SlidingMenu.OnClosedListener;
 import com.zonda.template.slide.SlidingMenu.OnOpenedListener;
 
