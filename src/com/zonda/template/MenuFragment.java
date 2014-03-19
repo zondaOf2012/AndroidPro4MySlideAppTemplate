@@ -12,6 +12,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.zonda.cjson.ZondaDJson;
+import com.zonda.second.R;
 
 public class MenuFragment extends BaseFragment {
 

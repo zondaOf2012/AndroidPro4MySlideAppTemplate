@@ -22,7 +22,7 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
-import com.zonda.template.R;
+import com.zonda.second.R;
 import com.zonda.template.slide.CustomViewAbove.OnPageChangeListener;
 
 public class SlidingMenu extends RelativeLayout {

@@ -6,13 +6,13 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.umeng.fb.FeedbackAgent;
 import com.umeng.fb.model.Conversation;
 import com.umeng.fb.model.Conversation.SyncListener;
 import com.umeng.fb.model.DevReply;
 import com.umeng.fb.model.Reply;
+import com.zonda.second.R;
 
 public class FeedBackActivity extends BaseActivity {
 

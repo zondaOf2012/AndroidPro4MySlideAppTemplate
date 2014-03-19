@@ -22,6 +22,9 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 
+import com.zonda.second.BuildConfig;
+import com.zonda.second.R;
+
 public class ImageGridFragment extends BaseFragment implements
 		AdapterView.OnItemClickListener {
 
